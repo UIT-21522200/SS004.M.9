@@ -1,4 +1,4 @@
-# SS004.M.9
+
 #include <iostream>
     
 #include <windows.h>
