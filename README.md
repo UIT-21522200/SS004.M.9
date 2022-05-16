@@ -1,2 +1,2 @@
 # SS004.M.9
-SNAKE GAME
+Tự tạo và thêm vào 1 thư viện cho hàm main
