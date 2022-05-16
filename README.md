@@ -1,13 +1,19 @@
 # SS004.M.9
 #include <iostream>
+    
 #include <windows.h>
+    
 #include <cstdlib>
+    
 #include <conio.h>
+    
 using namespace std;
+    
 void gotoxy( int column, int line );
 struct Point{
     int x,y;
 };
+    
 class CONRAN{
 public:
     struct Point A[100];
