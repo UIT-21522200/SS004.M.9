@@ -12,7 +12,7 @@ public:
     int DoDai;
     CONRAN(){
         DoDai = 3;
-        A[0].x = 10; A[0].y = 10;
+        A[0].x = 10; A[0].y = 10,
         A[1].x = 11; A[1].y = 10;
         A[2].x = 12; A[2].y = 10;
     }
@@ -57,7 +57,7 @@ int main()
 }
 
 
-void gotoxy( int column, int line )
+void gotoxy( int colum, int line )
   {
   COORD coord;
   coord.X = column;
