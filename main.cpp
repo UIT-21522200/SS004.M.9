@@ -3,6 +3,20 @@
 #define MAX 100
 using namespace std;
 
+class Point{
+public:
+	int x, y;
+	Point() {
+		x = y = 0;
+	}
+	void set(int a, int b) {
+		x = a;
+		y = b;
+	}
+};
+
+Point mangtuong[2000]; // luu toa do tuong
+int id = 0;
 int sl = 7; // do dai con ran
 
 //================ khu vuc khai bao nguyen mau ham ============
@@ -23,9 +37,11 @@ bool kt_ran(int toadox[], int toadoy[]);
 void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[]);
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[]);
 bool kt_ran_an_qua(int xqua, int yqua, int x0, int y0);
-void xu_ly_game_over(int toadox[], int toadoy[]);
+void xu_ly_game_over(int toadox[], int toadoy[], int map);
 void play(int speed);
 void Menu();
+void map2();
+bool kt_ran_map2(int toadox[], int toadoy[]);
 //============= ham main - xu ly chinh ==============
 int main()
 {
@@ -222,6 +238,9 @@ bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
 			return true;//ran de len qua
 		}
 	}
+	for (int i = 0; i < id - 1; i++) {
+		if (xqua == mangtuong[i].x && yqua == mangtuong[i].y) return true;
+	}
 	return false;
 }
 bool kt_ran_an_qua(int xqua, int yqua, int x0, int y0)
@@ -235,55 +254,76 @@ bool kt_ran_an_qua(int xqua, int yqua, int x0, int y0)
 
 // ngo van manh them xu ly game over;
 
-void xu_ly_game_over(int toadox[], int toadoy[]) {
-	if (kt_ran(toadox, toadoy) == true) {
+void xu_ly_game_over(int toadox[], int toadoy[], int map) {
+	if (map == 1) {
+		if (kt_ran(toadox, toadoy) == true) {
 
-		// xoa con ran vi no chet roi
+			// xoa con ran vi no chet roi
 
+			for (int i = 0; i < sl; i++) {
+				gotoXY(toadox[i], toadoy[i]);
+				cout << " ";
+				Sleep(25);
+			}
+
+			// xoa tuong 
+
+			for (int i = 100; i >= 10; i--) {
+				gotoXY(i, 26);
+				cout << " ";
+				Sleep(0.5);
+			}
+			for (int i = 26; i >= 1; i--) {
+				gotoXY(10, i);
+				cout << " ";
+				Sleep(1);
+			}
+			for (int i = 10; i <= 100; i++) {
+				gotoXY(i, 1);
+				cout << " ";
+				Sleep(0.5);
+			}
+			for (int i = 1; i <= 26; i++) {
+				gotoXY(100, i);
+				cout << " ";
+				Sleep(1);
+			}
+		}
+	}
+	else if (map == 2) {
 		for (int i = 0; i < sl; i++) {
 			gotoXY(toadox[i], toadoy[i]);
 			cout << " ";
 			Sleep(25);
 		}
-
-		// xoa tuong 
-
-		for (int i = 100; i >= 10; i--) {
-			gotoXY(i, 26);
+		for (int i = 0; i < id - 1; i++) {
+			gotoXY(mangtuong[i].x, mangtuong[i].y);
 			cout << " ";
-			Sleep(0.5);
 		}
-		for (int i = 26; i >= 1; i--) {
-			gotoXY(10, i);
-			cout << " ";
-			Sleep(1);
-		}
-		for (int i = 10; i <= 100; i++) {
-			gotoXY(i, 1);
-			cout << " ";
-			Sleep(0.5);
-		}
-		for (int i = 1; i <= 26; i++) {
-			gotoXY(100, i);
-			cout << " ";
-			Sleep(1);
-		}
-
-		system("cls");
-		gotoXY(55, 13);
-		SetColor(124);
-		cout << "Game Over\n";
-		Sleep(1000);
-		SetColor(7);
 	}
+	system("cls");
+	gotoXY(55, 13);
+	SetColor(124);
+	cout << "Game Over\n";
+	Sleep(1000);
+	SetColor(7);
 }
 
 //play gmae
 
 void play(int speed) {
+	int map;
+	cout << "Chon map (1-Hinh chu nhat, 2-Noname): ";
+	cin >> map;
+	system("cls");
 	bool gameover = false;
 	int toadox[MAX], toadoy[MAX];
-	ve_tuong();
+	if (map == 1) {
+		ve_tuong();
+	}
+	else if (map == 2) {
+		map2();
+	}
 	khoi_tao_ran(toadox, toadoy);
 	ve_ran(toadox, toadoy);
 	//===================== kiem tra va tao qua ==============
@@ -353,10 +393,15 @@ void play(int speed) {
 		}
 		xu_ly_ran(toadox, toadoy, x, y, xqua, yqua);
 		//========== kiem tra =========
-		gameover = kt_ran(toadox, toadoy);
+		if (map == 1) {
+			gameover = kt_ran(toadox, toadoy);
+		}
+		else if (map == 2) {
+			gameover = kt_ran_map2(toadox, toadoy);
+		}
 		Sleep(speed);
 	}
-	xu_ly_game_over(toadox, toadoy);
+	xu_ly_game_over(toadox, toadoy, map);
 }
 
 // menu game;
@@ -387,3 +432,60 @@ void Menu() {
 	}
 }
 
+void map2() {
+	for (int i = 10; i <= 100; i++) {
+		gotoXY(i, 1);
+		mangtuong[id++].set(i, 1);
+		cout << "+";
+		gotoXY(i, 26);
+		mangtuong[id++].set(i, 26);
+		cout << "+";
+	}
+	for (int i = 1; i <= 26; i++) {
+		gotoXY(10, i);
+		mangtuong[id++].set(10, i);
+		cout << "+";
+		gotoXY(100, i);
+		mangtuong[id++].set(100, i);
+		cout << "+";
+	}
+	for (int i = 21; i <= 89; i++) {
+		if (!(i >= 44 && i <= 66)) {
+			gotoXY(i, 7);
+			mangtuong[id++].set(i, 7);
+			cout << "+";
+		}
+		if ((i >= 26 && i <= 38) || (i >= 72 && i <= 84)) continue;
+		gotoXY(i, 19);
+		mangtuong[id++].set(i, 19);
+		cout << "+";
+	}
+	for (int i = 7; i <= 19; i++) {
+		gotoXY(21, i);
+		mangtuong[id++].set(21, i);
+		cout << "+";
+		gotoXY(89, i);
+		mangtuong[id++].set(89, i);
+		cout << "+";
+		if (i > 13) {
+			gotoXY(55, i);
+			mangtuong[id++].set(55, i);
+			cout << "+";
+			continue;
+		}
+		gotoXY(78, i);
+		mangtuong[id++].set(78, i);
+		cout << "+";
+		gotoXY(32, i);
+		mangtuong[id++].set(32, i);
+		cout << "+";
+	}
+}
+
+bool kt_ran_map2(int toadox[],int  toadoy[]) {
+	if (kt_ran_cham_duoi(toadox, toadoy)) return true;
+	for (int i = 0; i < id - 1; i++) {
+		if (toadox[0] == mangtuong[i].x && toadoy[0] == mangtuong[i].y) return true;
+	}
+	return false;
+}
