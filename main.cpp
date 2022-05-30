@@ -116,7 +116,7 @@ void ve_ran(int toadox[], int toadoy[])
 		gotoXY(toadox[i], toadoy[i]);
 		if (i == 0)
 		{
-			cout << "0";
+			cout << char(2);
 		}
 		else
 		{
@@ -226,7 +226,7 @@ void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[])
 	int i = rand() % (15 - 1 + 1) + 1;
 	SetColor(i);
 	gotoXY(xqua, yqua);
-	cout << "$";
+	cout << char(3);
 	SetColor(7);//mau trang
 }
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
@@ -418,16 +418,20 @@ void Menu() {
 		cout << endl << "Nhap lua chon cua ban: ";
 		cin >> lc;
 		system("cls");
-		if (lc == 1) play(speed);
+		if (lc == 1) {
+			sl = 7;
+			play(speed);
+		}
 		else if (lc == 2) {
 			cout << "\n1.Nhanh"; // speed = 100;
 			cout << "\n2.Trung Binh"; // speed = 150;
 			cout << "\n3.Cham"; // speed = 200;
+			cout << endl;
 			int choice = 2;
 			cin >> choice;
-			if (choice == 1) speed = 100;
-			else if (choice == 2) speed = 150;
-			else if (choice == 3) speed = 200;
+			if (choice == 1) speed = 75;
+			else if (choice == 2) speed = 100;
+			else if (choice == 3) speed = 130;
 		}
 	}
 }
