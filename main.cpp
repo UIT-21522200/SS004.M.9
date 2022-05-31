@@ -1,9 +1,10 @@
+
 #include <iostream>
 #include "mylib.h"
 #define MAX 100
 using namespace std;
 
-class Point{
+class Point {
 public:
 	int x, y;
 	Point() {
@@ -14,7 +15,7 @@ public:
 		y = b;
 	}
 };
-
+int save = 7;
 Point mangtuong[2000]; // luu toa do tuong
 int id = 0;
 int sl = 7; // do dai con ran
@@ -111,6 +112,7 @@ void khoi_tao_ran(int toadox[], int toadoy[])
 }
 void ve_ran(int toadox[], int toadoy[])
 {
+	SetColor(save);
 	for (int i = 0; i < sl; i++)
 	{
 		gotoXY(toadox[i], toadoy[i]);
@@ -120,7 +122,7 @@ void ve_ran(int toadox[], int toadoy[])
 		}
 		else
 		{
-			SetColor(124);
+			
 			cout << "o";
 		}
 	}
@@ -214,8 +216,11 @@ bool kt_ran(int toadox[], int toadoy[])
 	}
 	return false;
 }
+int fl = 1;
+int ss;
 void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[])
-{
+{	
+
 	do
 	{
 		//11 <= xqua <= 99
@@ -227,7 +232,12 @@ void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[])
 	SetColor(i);
 	gotoXY(xqua, yqua);
 	cout << char(3);
-	SetColor(7);//mau trang
+	
+	if (fl==1) save = 7;
+	else save = ss;
+	ss = i;
+	fl = 2;
+	
 }
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
 {
@@ -305,7 +315,7 @@ void xu_ly_game_over(int toadox[], int toadoy[], int map) {
 	gotoXY(55, 13);
 	SetColor(124);
 	cout << "Game Over\n";
-	Sleep(1000);
+	Sleep(300);
 	SetColor(7);
 }
 
@@ -324,6 +334,7 @@ void play(int speed) {
 	else if (map == 2) {
 		map2();
 	}
+	save = 7;
 	khoi_tao_ran(toadox, toadoy);
 	ve_ran(toadox, toadoy);
 	//===================== kiem tra va tao qua ==============
@@ -407,9 +418,9 @@ void play(int speed) {
 // menu game;
 void Menu() {
 	int lc = 1;
-	int speed = 150;
 	while (lc != 3) {
 		system("cls");
+		SetColor(6);
 		cout << "===============MENU===============";
 		cout << "\n|\t   1.Play                |";
 		cout << "\n|\t   2.Speed               |";
@@ -420,18 +431,18 @@ void Menu() {
 		system("cls");
 		if (lc == 1) {
 			sl = 7;
-			play(speed);
+			play(55);
 		}
 		else if (lc == 2) {
-			cout << "\n1.Nhanh"; // speed = 100;
-			cout << "\n2.Trung Binh"; // speed = 150;
-			cout << "\n3.Cham"; // speed = 200;
+			cout << "\n1.Nhanh"; 
+			cout << "\n2.Trung Binh"; 
+			cout << "\n3.Cham"; 
 			cout << endl;
 			int choice = 2;
 			cin >> choice;
-			if (choice == 1) speed = 75;
-			else if (choice == 2) speed = 100;
-			else if (choice == 3) speed = 130;
+			if (choice == 1) play(40);
+			else if (choice == 2) play(70);
+			else if (choice == 3) play(120);
 		}
 	}
 }
@@ -486,7 +497,7 @@ void map2() {
 	}
 }
 
-bool kt_ran_map2(int toadox[],int  toadoy[]) {
+bool kt_ran_map2(int toadox[], int  toadoy[]) {
 	if (kt_ran_cham_duoi(toadox, toadoy)) return true;
 	for (int i = 0; i < id - 1; i++) {
 		if (toadox[0] == mangtuong[i].x && toadoy[0] == mangtuong[i].y) return true;
