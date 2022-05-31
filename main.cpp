@@ -67,4 +67,35 @@ void gotoxy( int colum, int line )
     coord
     );
   }
-1
+// menu game;
+void Menu() {
+	int lc = 1;
+	while (lc != 3) {
+		system("cls");
+		SetColor(6);
+		gotoXY(40, 10);
+		cout << "===============MENU===============";
+		gotoXY(40, 11); cout << "|\t   1.Play                |";
+		gotoXY(40, 12); cout << "|\t   2.Speed               |";
+		gotoXY(40, 13); cout << "|\t   3.Quit                |";
+		gotoXY(40, 14); cout << "===============MENU===============";
+		gotoXY(40, 15); cout << "Nhap lua chon cua ban: ";
+		cin >> lc;
+		system("cls");
+		if (lc == 1) {
+			sl = 7;
+			play(55);
+		}
+		else if (lc == 2) {
+			gotoXY(40, 10); cout << "1.Nhanh";
+			gotoXY(40, 11); cout << "2.Trung Binh";
+			gotoXY(40, 12); cout << "3.Cham";
+			gotoXY(40, 13); cout << endl;
+			int choice = 2;
+			cin >> choice;
+			if (choice == 1) play(40);
+			else if (choice == 2) play(70);
+			else if (choice == 3) play(120);
+		}
+	}
+}
