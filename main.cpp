@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "mylib.h"
 #define MAX 100
@@ -122,7 +121,7 @@ void ve_ran(int toadox[], int toadoy[])
 		}
 		else
 		{
-			
+
 			cout << "o";
 		}
 	}
@@ -163,6 +162,7 @@ void them(int a[], int x)
 	a[0] = x;
 	sl++;
 }
+
 void xoa(int a[], int vt)
 {
 	for (int i = vt; i < sl; i++)
@@ -219,7 +219,7 @@ bool kt_ran(int toadox[], int toadoy[])
 int fl = 1;
 int ss;
 void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[])
-{	
+{
 
 	do
 	{
@@ -232,12 +232,12 @@ void tao_qua(int& xqua, int& yqua, int toadox[], int toadoy[])
 	SetColor(i);
 	gotoXY(xqua, yqua);
 	cout << char(3);
-	
-	if (fl==1) save = 7;
+
+	if (fl == 1) save = 7;
 	else save = ss;
 	ss = i;
 	fl = 2;
-	
+
 }
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
 {
@@ -322,8 +322,18 @@ void xu_ly_game_over(int toadox[], int toadoy[], int map) {
 //play gmae
 
 void play(int speed) {
+	sl = 7;
 	int map;
-	cout << "Chon map (1-Hinh chu nhat, 2-Noname): ";
+	gotoXY(39, 8);
+	cout << "===============MAP================";
+	gotoXY(39, 9);
+	cout << "|\t   1.Map 1              |";
+	gotoXY(39, 10);
+	cout << "|\t   2.Map 2              |";
+	gotoXY(39, 11);
+	cout << "===============MAP================";
+	gotoXY(39, 12);
+	cout << "Nhap lua chon cua ban: ";
 	cin >> map;
 	system("cls");
 	bool gameover = false;
@@ -421,25 +431,39 @@ void Menu() {
 	while (lc != 3) {
 		system("cls");
 		SetColor(6);
+		gotoXY(39,8);
 		cout << "===============MENU===============";
-		cout << "\n|\t   1.Play                |";
-		cout << "\n|\t   2.Speed               |";
-		cout << "\n|\t   3.Quit                |";
-		cout << "\n===============MENU===============";
-		cout << endl << "Nhap lua chon cua ban: ";
+		gotoXY(39, 9);
+		cout << "|\t   1.Play               |";
+		gotoXY(39, 10);
+		cout << "|\t   2.Speed              |";
+		gotoXY(39, 11);
+		cout << "|\t   3.Quit               |";
+		gotoXY(39, 12);
+		cout << "===============MENU===============";
+		gotoXY(39, 13);
+		cout << "Nhap lua chon cua ban: ";
 		cin >> lc;
 		system("cls");
 		if (lc == 1) {
-			sl = 7;
 			play(55);
 		}
 		else if (lc == 2) {
-			cout << "\n1.Nhanh"; 
-			cout << "\n2.Trung Binh"; 
-			cout << "\n3.Cham"; 
-			cout << endl;
+			gotoXY(39, 8);
+			cout << "===============SPEED==============";
+			gotoXY(39, 9);
+			cout << "|\t   1.Nhanh              |";
+			gotoXY(39, 10);
+			cout << "|\t   2.Trung Binh         |";
+			gotoXY(39, 11);
+			cout << "|\t   3.Cham               |";
+			gotoXY(39, 12);
+			cout << "===============SPEED==============";
+			gotoXY(39, 13);
+			cout << "Nhap lua chon cua ban: ";
 			int choice = 2;
 			cin >> choice;
+			system("cls");
 			if (choice == 1) play(40);
 			else if (choice == 2) play(70);
 			else if (choice == 3) play(120);
