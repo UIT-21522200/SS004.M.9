@@ -162,7 +162,6 @@ void them(int a[], int x)
 	a[0] = x;
 	sl++;
 }
-
 void xoa(int a[], int vt)
 {
 	for (int i = vt; i < sl; i++)
@@ -446,6 +445,7 @@ void Menu() {
 		cin >> lc;
 		system("cls");
 		if (lc == 1) {
+			sl = 7;
 			play(55);
 		}
 		else if (lc == 2) {
@@ -470,6 +470,7 @@ void Menu() {
 		}
 	}
 }
+
 
 void map2() {
 	for (int i = 10; i <= 100; i++) {
